@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommendation System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-light: #f8f9fa;
+            --text-muted: #adb5bd;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            margin-bottom: 2rem;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+
+        .form-container form {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .form-control {
+            padding: 1.25rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.25);
+        }
+
+        .btn-success {
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-success:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.6);
+        }
+
+        .btn-success:active {
+            transform: translateY(0);
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            height: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .card h5 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .message {
+            text-align: center;
+            margin: 2rem auto;
+            padding: 1rem;
+            font-size: 1.2rem;
+            color: #ff6b6b;
+            font-weight: 600;
+            max-width: 800px;
+            background-color: rgba(255, 107, 107, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin: 3rem 0 2rem;
+            text-align: center;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .rating {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .votes {
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            img {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>BookFinder</h1>
+        <p>Discover your next favorite read with personalized recommendations</p>
+    </div>
+
+    <div class="form-container">
+        <form action="/" method="POST">
+            <input name="user_input" type="text" class="form-control" placeholder="Enter book title, author, or genre..." required>
+            <div style="text-align:center;">
+                <input type="submit" class="btn btn-success" value="Find Recommendations">
+            </div>
+        </form>
+    </div>
+
+    {% if message %}
+        <div class="message">{{ message }}</div>
+    {% endif %}
+
+    <div class="container">
+        {% if data %}
+        <h2 class="section-title">Recommended For You</h2>
+        {% for book in data %}
+            {% if loop.index0 % 4 == 0 %}
+                <div class="row">
+            {% endif %}
+
+            <div class="col-md-3 col-sm-6" style="margin-bottom: 30px;">
+                <a href="/book/{{ book[0]|urlencode }}" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <img src="{{ book[2] }}" alt="Book Cover" onerror="this.src='https://via.placeholder.com/300x450/1e1e1e/ffffff?text=No+Cover'">
+                        <p>{{ book[1] }}</p>
+                        <h5>{{ book[0] }}</h5>
+                    </div>
+                </a>
+            </div>
+
+            {% if loop.index0 % 4 == 3 or loop.last %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        {% else %}
+        <h2 class="section-title">Popular Books</h2>
+        {% for i in range(book_name|length) %}
+            {% if i % 4 == 0 %}
+                <div class="row">
+            {% endif %}
+
+            <div class="col-md-3 col-sm-6" style="margin-bottom: 30px;">
+                <a href="/book/{{ book_name[i]|urlencode }}" style="text-decoration: none; color: inherit;">
+                    <div class="card">
+                        <img src="{{ image[i] }}" alt="Book Cover" onerror="this.src='https://via.placeholder.com/300x450/1e1e1e/ffffff?text=No+Cover'">
+                        <h5>{{ book_name[i] }}</h5>
+                        <p>{{ author[i] }}</p>
+                        <div class="book-meta">
+                            <span class="rating">★ {{ rating[i]|round(2) }}</span>
+                            <span class="votes">{{ votes[i] }} votes</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            {% if i % 4 == 3 or i == book_name|length - 1 %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <footer>
+        &copy; 2023 BookFinder | Find your next adventure
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

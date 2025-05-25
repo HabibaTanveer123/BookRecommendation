@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ book['Book-Title'] }} - Details</title>
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3f37c9;
+            --accent-color: #4cc9f0;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-light: #f8f9fa;
+            --text-muted: #adb5bd;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .book-details-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px;
+            justify-content: center;
+        }
+
+        .book-image {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .book-info {
+            max-width: 600px;
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            flex: 1;
+        }
+
+        .book-info h1 {
+            font-size: 2.5rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .book-info p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .book-info strong {
+            color: var(--primary-color);
+        }
+
+        .back-button {
+            background-color: var(--primary-color);
+            color: #fff;
+            font-size: 1rem;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            background-color: var(--dark-bg);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="book-details-container">
+        <div class="book-images">
+            <!-- First image -->
+            <img src="{{ book['Image-URL-L'] }}" alt="Cover" class="book-image">
+        </div>
+
+        <div class="book-info">
+            <h1>{{ book['Book-Title'] }}</h1>
+            <p><strong>Author:</strong> {{ book['Book-Author'] }}</p>
+            <p><strong>Year:</strong> {{ book['Year-Of-Publication'] }}</p>
+            <p><strong>Publisher:</strong> {{ book['Publisher'] }}</p>
+            <p><strong>ISBN:</strong> {{ book['ISBN'] }}</p>
+            <button class="back-button" onclick="window.history.back()">Go Back</button>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2023 BookFinder | All rights reserved
+    </footer>
+
+</body>
+</html>
